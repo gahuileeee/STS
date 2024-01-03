@@ -45,7 +45,7 @@
     </form>
 
     <!-- 버튼 2 -->
-    <form action="button2Action.jsp" method="post">
+    <form action="<c:url value="/bulletin/main01"/>" method="post">
         <button type="submit" class="button">bulletin board</button>
     </form>
 
