@@ -43,7 +43,7 @@
 <body>
 
     <!-- 로고 이미지 -->
-    <img src="/ch2/img/keyward.jpg" alt="Logo">
+    <img src="/resources/img/keyward.jpg" alt="Logo">
  <div class="button-container">
     <!-- 버튼 1 -->
     <form action="button1Action.jsp" method="post">

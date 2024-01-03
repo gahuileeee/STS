@@ -38,7 +38,7 @@
 <body>
 
     <!-- 로고 이미지 -->
-    <img src="/ch2/img/logo.jpg" alt="Logo">
+    <img src="/resources/img/logo.jpg" alt="Logo">
     <!-- 버튼 1 -->
     <form action="<c:url value="/key/key01"/>" >
         <button type="submit" class="button">Start</button>
