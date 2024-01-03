@@ -14,13 +14,20 @@
             text-align: center;
             margin: 20px;
         }
-        img {
+        #img {
         	 padding-top: 50px;
         	 padding-bottom: 40px;
-        	 
-            width: 65%;
-             margin-left: 8%;
+           font-family: 'Finger Paint', 바탕;
+           text-align: center;
+            font-size: 60px;
             height: auto;
+        }
+        .pink-text {
+            color: pink;
+        }
+
+        .green-text {
+            color: rgb(146, 231, 146);
         }
          .button-container {
             display: flex;
@@ -40,10 +47,14 @@
         }
     </style>
 
+
 <body>
 
     <!-- 로고 이미지 -->
-    <img src="/resources/img/keyward2.jpg" alt="Logo">
+ <div id="img">
+      <h1 ><span class="pink-text">Key</span>
+        <span class="green-text">Ward</span></h1>
+    </div>
  <div class="button-container">
     <!-- 버튼 1 -->
     <form action="<c:url value="/draw/draw01"/>" method="post">

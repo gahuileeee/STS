@@ -35,3 +35,19 @@ document.addEventListener("DOMContentLoaded", function() {
         context.stroke();
     }
 });
+function submitDrawing() {
+    var canvas = document.getElementById('drawingCanvas');
+    var drawingData = canvas.toDataURL(); // Canvas 데이터를 Base64로 인코딩
+
+    $.ajax({
+        type: 'POST',
+        url: 'board01.jsp',
+        data: { drawingData: drawingData },
+        success: function(response) {
+               console.log('Server response:', response);
+        },
+        error: function(error) {
+            console.error('Error submitting drawing:', error);
+        }
+    });
+}

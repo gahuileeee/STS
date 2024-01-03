@@ -14,13 +14,25 @@
             text-align: center;
             margin: 20px;
         }
-        img {
+        #img {
         	 padding-top: 50px;
         	 padding-bottom: 40px;
-        	 
-            width: 65%;
-             margin-left: 8%;
+           font-family: 'Finger Paint', 바탕;
+           text-align: center;
+            font-size: 60px;
             height: auto;
+        }
+        .pink-text {
+            color: pink;
+        }
+
+        .green-text {
+            color: rgb(146, 231, 146);
+        }
+         .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
         }
         .button {
             padding: 10px 20px;
@@ -38,7 +50,10 @@
 <body>
 
     <!-- 로고 이미지 -->
-    <img src="/resources/img/logo.jpg" alt="Logo">
+     <div id="img">
+      <h1 ><span class="pink-text">Dra</span>
+        <span class="green-text">Thing</span></h1>
+    </div>
     <!-- 버튼 1 -->
     <form action="<c:url value="/key/key01"/>" >
         <button type="submit" class="button">Start</button>
