@@ -46,7 +46,7 @@
     <img src="/resources/img/keyward.jpg" alt="Logo">
  <div class="button-container">
     <!-- 버튼 1 -->
-    <form action="button1Action.jsp" method="post">
+    <form action="<c:url value="/draw/draw01"/>" method="post">
         <button type="submit" class="button">RAMDOM</button>
     </form>
 
