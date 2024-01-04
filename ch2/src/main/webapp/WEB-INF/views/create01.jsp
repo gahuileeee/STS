@@ -45,6 +45,8 @@
             border-radius: 10px;
             box-shadow: none;
         }
+        
+
     </style>
 
 
@@ -58,12 +60,10 @@
  <div class="button-container">
     <!-- 버튼 1 -->
     <form action="<c:url value="/draw/draw01"/>" method="post">
-        <button type="submit" class="button">RAMDOM</button>
-    </form>
-
-    <!-- 버튼 2 -->
-    <form action="<c:url value="/key/create01"/>" method="post">
-        <button type="submit" class="button">CREATE</button>
+    <label for="키워드"  >  </label>
+  <input type ="text" id="키워드" required autofocus
+   style="font-family: 'Finger Paint', 맑음고딕; font-size : 30px; text-align: center;">
+        <button type="submit" class="button">NEXT</button>
     </form>
 </div>
 </body>

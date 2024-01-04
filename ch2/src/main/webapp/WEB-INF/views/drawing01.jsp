@@ -43,7 +43,11 @@
 </style>
 <body>
        <div id="subject">
-      <h1 style="color: pink;">subject: <span style="font-family:'Finger Paint', 바탕 ; color:rgb(146,231,146)">subject</span></h1>
+      <h1 style="color: pink;">subject: <span style="font-family:'Finger Paint', 바탕 ; color:rgb(146,231,146)">
+      <%
+      String a =(String)request.getAttribute("key");
+      a.getBytes();
+%></span></h1>
     </div>
 
     <div>
