@@ -61,7 +61,7 @@
     <!-- 버튼 1 -->
     <form action="<c:url value="/draw/draw01"/>" method="post">
     <label for="키워드"  >  </label>
-  <input type ="text" id="키워드" required autofocus
+  <input type ="text" id="키워드" name="key" required autofocus
    style="font-family: 'Finger Paint', 맑음고딕; font-size : 30px; text-align: center;">
         <button type="submit" class="button">NEXT</button>
     </form>

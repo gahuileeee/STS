@@ -65,6 +65,9 @@
     <form action="<c:url value="/key/create01"/>" method="post">
         <button type="submit" class="button">CREATE</button>
     </form>
+     <form action="<c:url value="/home01"/>" method="post">
+        <button type="submit" class="button">HOME</button>
+    </form>
 </div>
 </body>
 </html>

@@ -44,10 +44,8 @@
 <body>
        <div id="subject">
       <h1 style="color: pink;">subject: <span style="font-family:'Finger Paint', 바탕 ; color:rgb(146,231,146)">
-      <%
-      String a =(String)request.getAttribute("key");
-      a.getBytes();
-%></span></h1>
+      ${key}
+     </span></h1>
     </div>
 
     <div>
@@ -63,7 +61,7 @@
 
     <!-- 버튼 2 -->
     <form action="<c:url value="/key/key01"/>" method="post">
-        <button type="submit" class="button" >return</button>
+        <button type="submit" class="button" >return to keyward</button>
     </form>
       </div>
 </body>
