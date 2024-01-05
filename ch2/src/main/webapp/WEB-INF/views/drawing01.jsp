@@ -55,8 +55,10 @@
 
     <div id="button-container">
       <!-- 버튼 1 --> 
-    <form action = "<c:url value="/bulletin/main01"/>"  onclick="submitDrawing()" >
-        <button type="submit" class="button" >submit</button>
+    <form action = "<c:url value="/bulletin/main01"/>"  onsubmit="return submitDrawing()" method="post" >
+    <input type="hidden" name="drawingData" id="drawingDataInput">
+    <input type="hidden" name="key" value=${key}>
+        <button type="submit" class="button" name="print">submit</button>
     </form>
 
     <!-- 버튼 2 -->
@@ -68,25 +70,14 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
     function submitDrawing() {
-        var canvas = document.getElementById('drawingCanvas');
-        var drawingData = canvas.toDataURL();
+    	  var canvas = document.getElementById('drawingCanvas');
+          var drawingData = canvas.toDataURL();
 
-        $.ajax({
-            type: 'POST',
-            url: 'board01.jsp',
-            data: { drawingData: drawingData },
-            success: function(response) {
-                // 서버 응답을 콘솔에 출력
-                console.log('Server response:', response);
+          // drawingData를 hidden input에 설정
+          document.getElementById('drawingDataInput').value = drawingData;
 
-                // 응답을 받아 처리하는 추가적인 로직을 여기에 추가
-                // 예: 다른 페이지로 이동하거나, 현재 페이지의 내용 갱신 등
-                window.location.href = "<c:url value='/bulletin/main01'/>";
-            },
-            error: function(error) {
-                console.error('Error submitting drawing:', error);
-            }
-        });
+          // true를 리턴하여 폼이 계속해서 서버로 제출되도록 함
+          return true;
     }
 </script>
 </html>

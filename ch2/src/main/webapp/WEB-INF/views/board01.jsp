@@ -62,7 +62,7 @@
         // 서버에서 받은 이미지 데이터를 표시
         $(document).ready(function() {
             var drawingData = '<%= request.getParameter("drawingData") %>';
-            if (drawingData && drawingData !== '') {
+            if (drawingData.trim() !== '') {
                 $('#drawingImage img').attr('src', drawingData);
             } else {
                 $('#drawingImage').hide(); // 데이터가 없을 경우 이미지 공간을 숨김
