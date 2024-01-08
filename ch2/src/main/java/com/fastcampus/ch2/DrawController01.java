@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,24 +17,35 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class DrawController01 {
 	
 	@RequestMapping("/draw01")
-	public  String main(@RequestParam(name = "key", required = false)String key, Model model) throws Exception{
+	public  String main(@RequestParam(name = "key", required = false)String key, 
+			Model model,  HttpServletRequest request) throws Exception{
 		if(key!=null) {
 			model.addAttribute("key",key);
-			String DB_URL = "jdbc:mysql://127.0.0.1:3306/keyward?useUnicode=true&"
+			String a = request.getRemoteAddr();
+			String DB_URL = "jdbc:mysql://"+a+"/keyward?useUnicode=true&"
 					+ "characterEncoding=utf8&serverTimezone=UTC&useSSL=false";
-	        String DB_USER = "root";
+	        String DB_USER = "test";
 	        String DB_PASSWORD = "1234";
 	        Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD); 
-	        Statement stmt  = conn.createStatement(); 
-	        String query = "insert into `keywards` (`name`) values ('"+key+"')"; 
-	        stmt.execute(query); // query ½ð´Ù.
+	        Statement stmt  = conn.createStatement();
+	        
+	        String checkQuery = "SELECT * FROM `keywards` WHERE `name` = '" + key + "'";
+	        ResultSet resultSet = stmt.executeQuery(checkQuery);
+	        
+	        if(resultSet.next()) {
+	        	  
+	        }else {
+	        	 String query = "insert into `keywards` (`name`) values ('"+key+"')"; 
+	  	         stmt.execute(query);
+	        }
+	      
 	        
 		}else {
-			String DB_URL = "jdbc:mysql://127.0.0.1:3306/keyward?useUnicode=true&characterEncoding=utf8"
-					+ "&serverTimezone=UTC&useSSL=false";
-	        String DB_USER = "root";
+			String b = request.getRemoteAddr();
+			String DB_URL = "jdbc:mysql://"+b+"/keyward?useUnicode=true&"
+					+ "characterEncoding=utf8&serverTimezone=UTC&useSSL=false";
+	        String DB_USER = "test";
 	        String DB_PASSWORD = "1234";
-	        
 	        Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD); 
 	        Statement stmt  = conn.createStatement(); 
 	      
