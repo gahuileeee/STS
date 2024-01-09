@@ -35,19 +35,14 @@ document.addEventListener("DOMContentLoaded", function() {
         context.stroke();
     }
 });
+
 function submitDrawing() {
     var canvas = document.getElementById('drawingCanvas');
-    var drawingData = canvas.toDataURL(); // Canvas 데이터를 Base64로 인코딩
+    var drawingData = canvas.toDataURL("image/png"); // Canvas 데이터를 Base64로 인코딩
 
-    $.ajax({
-        type: 'POST',
-        url: 'board01.jsp',
-        data: { drawingData: drawingData },
-        success: function(response) {
-               console.log('Server response:', response);
-        },
-        error: function(error) {
-            console.error('Error submitting drawing:', error);
-        }
-    });
+    // hidden input에 그린 그림 데이터 설정
+    document.getElementById('drawingDataInput').value = drawingData;
+
+    // true를 반환하여 폼을 제출합니다.
+    return true;
 }
