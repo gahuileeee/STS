@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Finger+Paint&display=swap');
+
+        body {
+            text-align: center;
+            margin: 20px;
+        }
+        #img {
+        	 padding-top: 50px;
+        	 padding-bottom: 40px;
+           font-family: 'Finger Paint', πŸ≈¡;
+           text-align: center;
+            font-size: 60px;
+            height: auto;
+        }
+        .pink-text {
+            color: pink;
+        }
+
+        .green-text {
+            color: rgb(146, 231, 146);
+        }
+         .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .button {
+            padding: 10px 20px;
+            font-family: 'Finger Paint', πŸ≈¡;
+            font-size: 20px;
+            color: rgb(220, 148, 40);
+            margin: 10px;
+            background-color: rgb(254, 252, 242);
+            border-color: rgb(161, 131, 22) ;
+            border-radius: 10px;
+            box-shadow: none;
+        }

@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -24,40 +26,37 @@ public class BulletinController01 {
 		if(drawingData!=null) {
 //			model.addAttribute("drawingData",drawingData);
 			 String[] parts = drawingData.split(",");
-			    if (parts.length >= 2) {
-			        byte[] imageBytes = Base64.getDecoder().decode(parts[1]);
-			    }
-			
-			String a = request.getRemoteAddr();
-			String DB_URL = "jdbc:mysql://"+a+"/keyward?useUnicode=true&"
-					+ "characterEncoding=utf8&serverTimezone=UTC&useSSL=false";
-	        String DB_USER = "test";
-	        String DB_PASSWORD = "1234";
-	        Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD); 
+//			 byte[]imageBytes = Base64.getDecoder().decode(parts[1]);
+ 
+			 Connection conn= DBConnector.getConnection(request.getRemoteAddr(),"keyword","test","1234");
 	        Statement stmt  = conn.createStatement(); 
+	        String checkQuery = "SELECT * FROM `print` WHERE `printing` = '" + parts[1] + "'";
+	        ResultSet resultSet = stmt.executeQuery(checkQuery);
+	        if(resultSet.next()) {
+	        	  
+	        }else {
+	        	String query = "insert into `print` (name, printing) values ('"+key+"','"+parts[1]+"')"; 
+		        stmt.execute(query);
+	        }
 	        
-	        String query = "insert into `print` values ('"+key+"','"+drawingData+"')"; 
-	        stmt.execute(query); // query ½ð´Ù.
+	        
+	  
 		}
 		
-		String a = request.getRemoteAddr();
-		String DB_URL = "jdbc:mysql://"+a+"/keyward?useUnicode=true&"
-				+ "characterEncoding=utf8&serverTimezone=UTC&useSSL=false";
-        String DB_USER = "test";
-        String DB_PASSWORD = "1234";
-        Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD); 
+		Connection conn= DBConnector.getConnection(request.getRemoteAddr(),"keyword","test","1234");
         Statement stmt  = conn.createStatement();
-        
         String query = "select * from print";
         ResultSet rs = stmt.executeQuery(query);
+        List<String> Images = new ArrayList<>();
+        List<String> keys = new ArrayList<>();
         while(rs.next()) {
-        	String name =rs.getString(1);
-        	model.addAttribute("name", name);
-        	String base64Image = java.util.Base64.getEncoder().encodeToString(rs.getBytes(2));
-        	System.out.println(base64Image);
-        	model.addAttribute("print", base64Image);
+        	String name =rs.getString(2);
+        	keys.add(name);
+//        	String base64Image = java.util.Base64.getEncoder().encodeToString(rs.getBytes(2));
+        	Images.add(rs.getString(3));
         }
-        
+        model.addAttribute("names",keys);
+        model.addAttribute("prints",Images);
 		
 		return "board01";
 	}

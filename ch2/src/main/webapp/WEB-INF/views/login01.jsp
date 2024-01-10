@@ -18,15 +18,7 @@
       <h1 ><span class="pink-text">Dra</span>
         <span class="green-text">Thing</span></h1>
     </div>
-    <!-- 버튼 1 -->
-    <form action="<c:url value="/login/select01"/>" >
-        <button type="submit" class="button">Start</button>
-    </form>
-
-    <!-- 버튼 2 -->
-    <form action="<c:url value="/bulletin/main01"/>" method="post">
-        <button type="submit" class="button">bulletin board</button>
-    </form>
+  
 
 </body>
 </html>

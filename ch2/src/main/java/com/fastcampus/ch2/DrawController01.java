@@ -21,35 +21,23 @@ public class DrawController01 {
 			Model model,  HttpServletRequest request) throws Exception{
 		if(key!=null) {
 			model.addAttribute("key",key);
-			String a = request.getRemoteAddr();
-			String DB_URL = "jdbc:mysql://"+a+"/keyward?useUnicode=true&"
-					+ "characterEncoding=utf8&serverTimezone=UTC&useSSL=false";
-	        String DB_USER = "test";
-	        String DB_PASSWORD = "1234";
-	        Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD); 
+			Connection conn= DBConnector.getConnection(request.getRemoteAddr(),"keyword","test","1234");
 	        Statement stmt  = conn.createStatement();
 	        
-	        String checkQuery = "SELECT * FROM `keywards` WHERE `name` = '" + key + "'";
+	        String checkQuery = "SELECT * FROM `keywords` WHERE `name` = '" + key + "'";
 	        ResultSet resultSet = stmt.executeQuery(checkQuery);
-	        
 	        if(resultSet.next()) {
 	        	  
 	        }else {
-	        	 String query = "insert into `keywards` (`name`) values ('"+key+"')"; 
+	        	 String query = "insert into `keywords` (`name`) values ('"+key+"')"; 
 	  	         stmt.execute(query);
 	        }
 	      
 	        
 		}else {
-			String b = request.getRemoteAddr();
-			String DB_URL = "jdbc:mysql://"+b+"/keyward?useUnicode=true&"
-					+ "characterEncoding=utf8&serverTimezone=UTC&useSSL=false";
-	        String DB_USER = "test";
-	        String DB_PASSWORD = "1234";
-	        Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD); 
+			Connection conn= DBConnector.getConnection(request.getRemoteAddr(),"keyword","test","1234");
 	        Statement stmt  = conn.createStatement(); 
-	      
-	        String query = "select count(`seq`) from keywards";
+	        String query = "select count(`seq`) from keywords";
 	        ResultSet rs = stmt.executeQuery(query); // query를 실행한 결과를 rs에 담는다
 	        int a=0;
 	        while(rs.next()) {
@@ -63,7 +51,6 @@ public class DrawController01 {
 	        	 model.addAttribute("key",key);
 	        }
 	       
-	 
 		}
 		return "drawing01";
 	}

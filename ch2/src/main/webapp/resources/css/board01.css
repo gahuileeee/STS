@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Finger+Paint&display=swap');
+
+    #title{
+        text-align: center;
+        font-family: 'Finger Paint', 바탕;
+        background-color: rgb(255, 243, 224);
+    }
+    h1 {
+      display: inline-block;
+      padding: 5px 10px;
+    }
+
+    .pink-text {
+      color: pink;
+    }
+
+    .green-text {
+      color: rgb(146, 231, 146);
+    }
+    #nav{
+        font-family: 'Finger Paint', 바탕;
+        height: 55px;
+        background-color: pink;
+        text-align: right;
+        margin-top:10px;
+        margin-bottom:10px;
+        display: flex;
+	  justify-content: flex-end; 
+        align-items: center;
+    }
+    #context{
+        box-sizing: border-box ;
+        width: auto;
+        height: 1300px;
+        background-color: rgb(255, 243, 224);
+        text-align: left;
+    }
+         .image-container {
+            display: inline-block;
+            margin: 15px; /* 이미지 사이의 간격 조절 */
+             width: 250px;
+            height: 250px;
+            text-align: center;
+             background-color: white;
+             border: 1px solid black;
+        }
+           .image-container img {
+            width: 230px;
+            height: 230px;
+            object-fit: cover; /* 이미지 비율 유지 및 크기 조절 */
+        }
+        h5{
+          font-family: 'Finger Paint', 바탕;
+        }
+        
+        #button1 {
+    border: none; /* 테두리 제거 */
+    padding: 0; /* 내부 여백 제거 */
+    background: none; /* 배경 제거 */
+    color: inherit; /* 부모 요소의 텍스트 색상 상속 */
+    cursor: pointer;
+    text-decoration: underline; /* 텍스트에 밑줄 추가 */
+    font-size: inherit; /* 부모 요소의 폰트 크기 상속 */
+    margin: 0; /* 마진 제거 */
+}
+	#button2{
+    border: none;
+    padding: 0px 5px; 
+    margin-right : 25px;
+    background: pink; 
+    color: white; 
+    cursor: pointer;
+    font-size: inherit;
+     height: 20px; 
+     box-sizing : border-box;
+     flex-grow: 1;
+	}
+   	
