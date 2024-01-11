@@ -19,12 +19,12 @@
 
     <div id="nav">
        <form action="<c:url value="/home01"/>" method= "post" >
-       <button type = "summit" class = "button" id='button2'>
+       <button type = "submit" class = "button" id='button2'>
        	<h3>home</h3>
        </button>
        </form>
           <form action="<c:url value="/login/login01"/>" method= "post" >
-       <button type = "summit" class = "button" id='button2'>
+       <button type = "submit" class = "button" id='button2'>
        	<h3>login</h3>
        </button>
        </form>

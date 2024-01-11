@@ -39,7 +39,7 @@ public class BulletinController01 {
 		        stmt.execute(query);
 	        }
 	        
-	        
+	        conn.close();
 	  
 		}
 		
@@ -57,7 +57,7 @@ public class BulletinController01 {
         }
         model.addAttribute("names",keys);
         model.addAttribute("prints",Images);
-		
+        conn.close();
 		return "board01";
 	}
 }

@@ -5,18 +5,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href='/resources/css/index01.css'>
+    <link rel="stylesheet" href='/resources/css/index01n.css'>
     <title>DraThing</title>
 </head>
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Finger+Paint&display=swap');
+
+
     </style>
 
 <body>
 
     <!-- 로고 이미지 -->
      <div id="img">
-      <h1 ><span class="pink-text">Dra</span>
-        <span class="green-text">Thing</span></h1>
+      <h1 ><span class="pink-text">Dra</span> <span class="green-text">Thing</span></h1>
     </div>
     <!-- 버튼 1 -->
     <form action="<c:url value="/login/select01"/>" >

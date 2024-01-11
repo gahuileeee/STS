@@ -1,0 +1,93 @@
+        @import url('https://fonts.googleapis.com/css2?family=Finger+Paint&display=swap');
+
+        body {
+            text-align: center;
+            margin: 20px;
+            font-family: 'Finger Paint', sans-serif;
+        }
+
+        #img {
+            padding-top: 50px;
+            padding-bottom: 0px;
+            font-size: 60px;
+            height: auto;
+        }
+
+        .pink-text {
+            color: pink;
+        }
+
+        .green-text {
+            color: rgb(146, 231, 146);
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .button {
+            padding: 10px 20px;
+            font-size: 20px;
+            color: rgb(220, 148, 40);
+            margin: 10px;
+            background-color: rgb(254, 252, 242);
+            border: 2px solid rgb(161, 131, 22);
+            border-radius: 10px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .button:hover {
+            background-color: rgb(161, 131, 22);
+            color: rgb(254, 252, 242);
+        }
+
+        .login-container {
+            max-width: 400px;
+            margin: auto;
+        }
+
+        .login-form {
+            background-color: rgb(254, 252, 242);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+            align-items: center;
+            justify-content: center; 
+        }
+
+        .form-group label {
+            font-size: 18px;
+            text-align: center;
+            margin-right: 10px;
+            color:rgb(161, 131, 22);
+        }
+
+        .form-group input {
+            width: calc(100% - 22px);
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-left: 0px;
+           
+        }
+        #button2{
+            font-family: 'Finger Paint', sans-serif;
+        border: none;
+        padding: px 5px; 
+         color: black; 
+         font-size: inherit;
+         height: 20px; 
+         box-sizing : border-box;
+        flex-grow: 1;
+        margin-top: 12px;
+	}

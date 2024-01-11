@@ -44,6 +44,11 @@
             border-color: rgb(161, 131, 22) ;
             border-radius: 10px;
             box-shadow: none;
+              transition: background-color 0.3s, color 0.3s
+        }
+          .button:hover {
+            background-color: rgb(161, 131, 22);
+            color: rgb(254, 252, 242);
         }
     </style>
 

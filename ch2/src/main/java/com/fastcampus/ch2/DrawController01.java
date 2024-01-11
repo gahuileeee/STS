@@ -32,13 +32,13 @@ public class DrawController01 {
 	        	 String query = "insert into `keywords` (`name`) values ('"+key+"')"; 
 	  	         stmt.execute(query);
 	        }
-	      
+	        conn.close();
 	        
 		}else {
 			Connection conn= DBConnector.getConnection(request.getRemoteAddr(),"keyword","test","1234");
 	        Statement stmt  = conn.createStatement(); 
 	        String query = "select count(`seq`) from keywords";
-	        ResultSet rs = stmt.executeQuery(query); // query를 실행한 결과를 rs에 담는다
+	        ResultSet rs = stmt.executeQuery(query); 
 	        int a=0;
 	        while(rs.next()) {
 	        	 a= Integer.parseInt(rs.getString(1));   
@@ -50,7 +50,7 @@ public class DrawController01 {
 	        	 key = rs.getString(2);
 	        	 model.addAttribute("key",key);
 	        }
-	       
+	       conn.close();
 		}
 		return "drawing01";
 	}

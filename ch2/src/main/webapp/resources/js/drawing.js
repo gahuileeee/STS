@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function submitDrawing() {
     var canvas = document.getElementById('drawingCanvas');
-    var drawingData = canvas.toDataURL("image/png"); // Canvas 데이터를 Base64로 인코딩
+    var drawingData = canvas.toDataURL("image/png"); // 
 
     // hidden input에 그린 그림 데이터 설정
     document.getElementById('drawingDataInput').value = drawingData;
