@@ -53,7 +53,7 @@
     <!-- 로고 이미지 -->
  <div id="img">
       <h1 ><span class="pink-text">Key</span>
-        <span class="green-text">Ward</span></h1>
+        <span class="green-text">Word</span></h1>
     </div>
  <div class="button-container">
     <!-- 버튼 1 -->

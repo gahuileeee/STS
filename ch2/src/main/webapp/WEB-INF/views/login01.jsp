@@ -20,25 +20,24 @@
 
     <!-- 로그인 폼 -->
     <div class="login-container">
-        <form class="login-form">
+        <form class="login-form" action="<c:url value="/key/key01"/>" method="post">
             <div class="form-group">
-                <label for="username">ID:</label>
-                <input type="text" id="username" name="username" required>
+                <label for="username">ID(email):</label>
+                <input type="text" id="username" name="username">
             </div>
             <div class="form-group">
                 <label for="password">password:</label>
-                <input type="password" id="password" name="password" required>
+                <input type="password" id="password" name="password">
             </div>
             <div class="button-container">
                 <button type="submit" class="button">Login</button>
-                <button type="submit" class="button">Sign In</button>
             </div>
         </form>
     </div>
     
 	<div>
-	<form action="<c:url value="/home01"/>" method="post">
-	<button type="submit" class="guest-button" id='button2'>Access as a Guest</button>
+	<form action="<c:url value="/register/res01"/>" method="post">
+	<button type="submit" class="guest-button" id='button2'>Do not have an account?</button>
 	</form>
 	</div>
 

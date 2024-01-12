@@ -67,7 +67,7 @@
     </form>
 
     <!-- 버튼 2 -->
-    <form action="<c:url value="/key/key01"/>" method="post">
+    <form action="<c:url value="/key/key01"/>" name="user" method="post">
         <button type="submit" class="button">GUEST</button>
     </form>
  
