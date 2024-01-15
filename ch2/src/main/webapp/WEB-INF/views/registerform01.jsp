@@ -5,66 +5,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href='/resources/css/login01.css'>
     <title>DraThing</title>
 </head>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Finger+Paint&display=swap');
-
-        body {
-            text-align: center;
-            margin: 20px;
-        }
-        #img {
-        	 padding-top: 50px;
-        	 padding-bottom: 40px;
-           font-family: 'Finger Paint', 바탕;
-           text-align: center;
-            font-size: 60px;
-            height: auto;
-        }
-        .pink-text {
-            color: pink;
-        }
-
-        .green-text {
-            color: rgb(146, 231, 146);
-        }
-         .button-container {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
-        .button {
-            padding: 10px 20px;
-            font-family: 'Finger Paint', 바탕;
-            font-size: 20px;
-            color: rgb(220, 148, 40);
-            margin: 10px;
-            background-color: rgb(254, 252, 242);
-            border-color: rgb(161, 131, 22) ;
-            border-radius: 10px;
-            box-shadow: none;
-        }
-        
-
-    </style>
 
 
 <body>
 
     <!-- 로고 이미지 -->
- <div id="img">
-      <h1 ><span class="pink-text">Key</span>
-        <span class="green-text">Ward</span></h1>
+    <div id="img">
+        <h1><span class="pink-text">Dra</span><span class="green-text">Thing</span></h1>
     </div>
- <div class="button-container">
-    <!-- 버튼 1 -->
-    <form action="<c:url value="/draw/draw01"/>" method="post">
-    <label for="키워드"  >  </label>
-  <input type ="text" id="키워드" name="key" required autofocus
-   style="font-family: 'Finger Paint', 맑음고딕; font-size : 30px; text-align: center;">
-        <button type="submit" class="button">NEXT</button>
-    </form>
-</div>
+
+    <!-- 회원가입 폼 -->
+    <div class="login-container">
+        <form class="login-form" action="${pageContext.request.contextPath}/key/key01" onsubmit="return validateForm()" method="post" >
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <label for="confirm-password">Confirm Password:</label>
+                <input type="password" id="confirm-password" name="confirm-password" required>
+            </div>
+            <div class="button-container">
+                <button type="submit" class="button" >Create Account</button>
+            </div>
+        </form>
+    </div>
+    
+    <!-- 이미 가입한 경우 로그인으로 이동하는 버튼 -->
+    <div>
+        <form action="c:url value=>" method="get">
+            <button type="submit" class="guest-button" id='button2'>Already have an account? Login</button>
+        </form>
+    </div>
+
 </body>
+
 </html>

@@ -1,7 +1,7 @@
 package com.fastcampus.ch2;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,13 +14,15 @@ public class KeywordController01 {
 
 	@RequestMapping("/key01")
 	public  String main(Model model, @RequestParam(name = "user", required = false)String user,
-			HttpServletRequest request){
-		if(user.equals("null")) {
-			user="guest";
+			HttpServletRequest request, HttpServletResponse response){
+		if(user==null) {
+			CookieManager cookie = new CookieManager();
+			cookie.addCookie(response, "userInfo", "guest", 60*60);
+		}else {
+
+			CookieManager cookie = new CookieManager();
+			cookie.addCookie(response, "userInfo" , user, 60*60);	
 		}
-		HttpSession session =request.getSession();
-		session.setMaxInactiveInterval(60*60);
-		session.setAttribute("user", user);
 		return "keyword01";
 	}
 	

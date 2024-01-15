@@ -21,7 +21,7 @@ public class DrawController01 {
 			Model model,  HttpServletRequest request) throws Exception{
 		if(key!=null) {
 			model.addAttribute("key",key);
-			Connection conn= DBConnector.getConnection(request.getRemoteAddr(),"keyword","test","1234");
+			Connection conn= DBConnector.getConnection("localhost:3306","keyword","root","1234");
 	        Statement stmt  = conn.createStatement();
 	        
 	        String checkQuery = "SELECT * FROM `keywords` WHERE `name` = '" + key + "'";
@@ -35,7 +35,7 @@ public class DrawController01 {
 	        conn.close();
 	        
 		}else {
-			Connection conn= DBConnector.getConnection(request.getRemoteAddr(),"keyword","test","1234");
+			Connection conn= DBConnector.getConnection("localhost:3306","keyword","root","1234");
 	        Statement stmt  = conn.createStatement(); 
 	        String query = "select count(`seq`) from keywords";
 	        ResultSet rs = stmt.executeQuery(query); 

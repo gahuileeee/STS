@@ -28,14 +28,16 @@ public class BulletinController01 {
 			 String[] parts = drawingData.split(",");
 //			 byte[]imageBytes = Base64.getDecoder().decode(parts[1]);
  
-			 Connection conn= DBConnector.getConnection(request.getRemoteAddr(),"keyword","test","1234");
+			 Connection conn= DBConnector.getConnection("localhost:3306","keyword","root","1234");
 	        Statement stmt  = conn.createStatement(); 
 	        String checkQuery = "SELECT * FROM `print` WHERE `printing` = '" + parts[1] + "'";
 	        ResultSet resultSet = stmt.executeQuery(checkQuery);
 	        if(resultSet.next()) {
 	        	  
 	        }else {
-	        	String query = "insert into `print` (name, printing) values ('"+key+"','"+parts[1]+"')"; 
+	        	CookieManager cookie = new CookieManager();
+	        	String b= cookie.getCookieValue(request, "userInfo");
+	        	String query = "insert into `print` (name, printing, user) values ('"+key+"','"+parts[1]+"','"+b+"')"; 
 		        stmt.execute(query);
 	        }
 	        
@@ -43,7 +45,7 @@ public class BulletinController01 {
 	  
 		}
 		
-		Connection conn= DBConnector.getConnection(request.getRemoteAddr(),"keyword","test","1234");
+		Connection conn= DBConnector.getConnection("localhost:3306","keyword","root","1234");
         Statement stmt  = conn.createStatement();
         String query = "select * from print";
         ResultSet rs = stmt.executeQuery(query);
