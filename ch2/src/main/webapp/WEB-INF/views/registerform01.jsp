@@ -7,6 +7,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href='/resources/css/login01.css'>
     <title>DraThing</title>
+    
+        <script>
+        function validateForm() {
+            // 이메일 형식 검증
+            var email = document.getElementById("email").value;
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert("올바른 이메일 주소를 입력하세요.");
+                return false;
+            }
+
+            // 비밀번호 일치 여부 확인
+            var password = document.getElementById("password").value;
+            var confirmPassword = document.getElementById("confirm-password").value;
+            if (password !== confirmPassword) {
+                alert("비밀번호와 확인 비밀번호가 일치하지 않습니다.");
+                return false;
+            }
+
+            // 모든 유효성 검사를 통과하면 true 반환
+            return true;
+        }
+    </script>
 </head>
 
 
@@ -19,7 +42,7 @@
 
     <!-- 회원가입 폼 -->
     <div class="login-container">
-        <form class="login-form" action="${pageContext.request.contextPath}/key/key01" onsubmit="return validateForm()" method="post" >
+        <form class="login-form" action="${pageContext.request.contextPath}/login/login01" onsubmit="return validateForm()" method="post" >
             <div class="form-group">
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" required>
@@ -40,7 +63,7 @@
     
     <!-- 이미 가입한 경우 로그인으로 이동하는 버튼 -->
     <div>
-        <form action="c:url value=>" method="get">
+        <form action="${pageContext.request.contextPath}/login/login01"" method="get">
             <button type="submit" class="guest-button" id='button2'>Already have an account? Login</button>
         </form>
     </div>
