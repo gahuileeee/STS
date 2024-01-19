@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class DBConnector {
 	  public static Connection getConnection(String host, String database, String user, String password) throws SQLException {
 	        String DB_URL = "jdbc:mysql://" + host + "/" + database + "?useUnicode=true&"
-	                + "characterEncoding=utf8&serverTimezone=UTC&useSSL=false";
+	                + "characterEncoding=utf8&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true";
 	        return DriverManager.getConnection(DB_URL, user, password);
 	    }
 
