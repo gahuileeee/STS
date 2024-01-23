@@ -1,23 +1,44 @@
 package com.fastcampus.ch2;
 
+import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
 
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+
 @Controller
 @RequestMapping("bulletin")
 public class BulletinController01 {
+	@RequestMapping("/logout01")
+	public String main2(HttpServletResponse response, HttpServletRequest request) {
+		HttpSession session= request.getSession();			
+		CookieManager.deleteCookie(response, "user" , String.valueOf(session.getAttribute("user")));
+		session.invalidate();
+		return "redirect:/bulletin/main01";
+	}
+	
+	@RequestMapping("/login01")
+	public String main3(HttpServletResponse response, HttpServletRequest request) {
+		SessionManager se = new SessionManager();
+		se.setSessionAttribute("currentPageUrl","Board");
+		return "login01";
+	}
+	
+	
 	
 	@RequestMapping("/main01")
 	public  String main(@RequestParam(name = "drawingData", required = false)String drawingData,
@@ -35,12 +56,16 @@ public class BulletinController01 {
 	        if(resultSet.next()) {
 	        	  
 	        }else {
-	        	CookieManager cookie = new CookieManager();
-	        	String b= cookie.getCookieValue(request, "userInfo");
+	        	HttpSession session= request.getSession();	
+	        	String b= String.valueOf(session.getAttribute("user"));
+	        	if(b.equals("null")) {
+	        		b="guest";
+	        	}
 	        	String query = "insert into `print` (name, printing, user) values ('"+key+"','"+parts[1]+"','"+b+"')"; 
 		        stmt.execute(query);
 	        }
-	        
+	        resultSet.close();
+	        stmt.close();
 	        conn.close();
 	  
 		}
@@ -59,6 +84,8 @@ public class BulletinController01 {
         }
         model.addAttribute("names",keys);
         model.addAttribute("prints",Images);
+        rs.close();
+        stmt.close();
         conn.close();
 		return "board01";
 	}

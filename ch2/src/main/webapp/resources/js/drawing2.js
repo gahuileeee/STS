@@ -4,7 +4,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
     var drawing = false;
     var erasing = false;
-    var currentColor = "#FF0000";
+    var currentColor = "#000000";
+    var lineSize = 5;
 
     canvas.addEventListener("mousedown", function(e) {
         drawing = true;
@@ -26,28 +27,37 @@ document.addEventListener("DOMContentLoaded", function() {
         drawing = false;
     });
 
-    // 지우개 모드 토글
     document.getElementById("eraserButton").addEventListener("click", function() {
         erasing = !erasing;
+        toggleSizeUI(erasing);
         if (erasing) {
-            currentColor = "#ffffff"; // 흰색으로 설정하여 지우개 모드
+            currentColor = "#ffffff";
         } else {
-            currentColor = document.getElementById("colorPicker").value; // 색상 선택기의 값으로 설정
+            currentColor = document.getElementById("colorPicker").value;
         }
     });
+	
+    document.getElementById("penButton").addEventListener("click", function() {
+        erasing = false;
+        toggleSizeUI(false);
+        currentColor = document.getElementById("colorPicker").value;
+    });
 
-    // 색상 변경
-     document.getElementById("colorPicker").addEventListener("input", function() {
+    document.getElementById("lineSizeRange").addEventListener("input", function() {
+        lineSize = parseInt(this.value);
+    });
+
+    document.getElementById("colorPicker").addEventListener("input", function() {
         currentColor = this.value;
         erasing = false;
-        toggleEraserSizeUI(false);
+        toggleSizeUI(false);
     });
 
     function draw(x, y, isDrawing) {
         if (!isDrawing) {
             context.beginPath();
         }
-        context.lineWidth = 5;
+        context.lineWidth = lineSize;
         context.lineCap = "round";
         context.strokeStyle = currentColor;
         context.globalCompositeOperation = erasing ? "destination-out" : "source-over";
@@ -55,6 +65,11 @@ document.addEventListener("DOMContentLoaded", function() {
         context.lineTo(x, y);
         context.stroke();
     }
+
+   function toggleSizeUI(show) {
+    var sizeContainer = document.getElementById("sizeContainer");
+    sizeContainer.style.display = "flex";
+}
 });
 
 function submitDrawing() {

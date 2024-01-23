@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:set var="loginOutLink" value="${sessionScope.user==null ? '/login/login01' : '/login/logout01'}"/>
+<c:set var="loginOut" value="${sessionScope.user==null ? 'Login' : 'Logout'}"/>
+<c:set var="Guest" value="${sessionScope.user==null ? 'Guest' : 'Start'}"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DraThing</title>
 </head>
+     
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Finger+Paint&display=swap');
 
@@ -62,13 +66,13 @@
     </div>
  <div class="button-container">
     <!-- 버튼 1 -->
-    <form action="<c:url value="/login/login01"/>" method="post">
-        <button type="submit" class="button">LOGIN</button>
+    <form action="<c:url value="${loginOutLink}"/>" method="post">
+        <button type="submit" class="button">${loginOut}</button>
     </form>
 
     <!-- 버튼 2 -->
     <form action="<c:url value="/key/key01"/>" name="user" method="post">
-        <button type="submit" class="button">GUEST</button>
+        <button type="submit" class="button"  id="guestButton">${Guest}</button>
     </form>
  
 </div>

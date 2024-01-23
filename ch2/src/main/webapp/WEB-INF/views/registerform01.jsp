@@ -7,68 +7,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href='/resources/css/login01.css'>
-    <title>DraThing</title>
     
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-   <script type="text/javascript" src="/resources/js/jquery.serialize-Object.min.js"></script>
-
-            <script>
-    function validateForm() {
+    <title>DraThing</title>
+    <script>
+    
+    // 폼 제출 시 실행되는 함수
+    function onSubmitForm() {
+        
         var email = document.getElementById("email").value;
         var password = document.getElementById("password").value;
         var confirmPassword = document.getElementById("confirm-password").value;
+        var data = {
+                email: email,
+                password: password,
+                confirmPassword: confirmPassword
+            };
 
-        // 클라이언트 측에서 유효성 검사
-        var validationResult = {
-            isValid: true,
-            errors: {}
-        };
-        
-        // 이메일 형식 검증
-        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            validationResult.isValid = false;
-            validationResult.errors.email = "올바른 이메일 주소를 입력하세요.";
-        }
-	console.log("here1");
-        // 비밀번호 일치 여부 확인
-        if (password !== confirmPassword) {
-            validationResult.isValid = false;
-            validationResult.errors.confirmPassword = "비밀번호와 확인 비밀번호가 일치하지 않습니다.";
-        }
-        
-
-        // 서버로 JSON 데이터 전송
-        if (!validationResult.isValid) {
-            for (var key in validationResult.errors) {
-                if (validationResult.errors.hasOwnProperty(key)) {
-                    alert(validationResult.errors[key]);
-                }
-            }
+            // 서버로 데이터 전송
+            sendFormData(data);
             return false;
+    }
+    
+ // 서버로 JSON 데이터 전송
+    function sendFormData(data) {
+        fetch('${pageContext.request.contextPath}/signup01', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+        .then(response => response.json())
+        .then(errorMessages => {
+        // 서버로부터의 응답 처리
+        console.log('Error Messages:', errorMessages);
+
+        if (errorMessages.length > 0) {
+            errorMessages.forEach(errorMessage => {
+            	alert(errorMessage);
+                console.error(errorMessage);
+            });
+        } else {
+            // 에러가 없는 경우
+        	 document.getElementById("form").submit();
         }
-     // 서버로 유효성 검사 요청
-      console.log("아ㅏㅏㅏ아");
-       var user = $("form").serializeObject();
-        $.ajax({
-            type: "POST",
-            url: "signup",
-            contentType: "application/json;charset=UTF-8",
-            data: user,
-            dataType: "json",
-            success: function (response) {
-                if (response.error !==  null) {
-                   alert(response.error);
-                } else {
-                    // 서버의 유효성 검사 통과 시, 폼 제출
-                    $("form").submit();
-                }
-            }
-            error : function(error) {
-            	alert("처리 실패");
-            }
+    })
+        .catch((error) => {
+            console.error('Error:', error);
         });
-        console.log("아ㅏㅏㅏ아???ㄴ");
     }
 </script>
 </head>
@@ -83,7 +69,7 @@
 
     <!-- 회원가입 폼 -->
     <div class="login-container">
-        <form class="login-form" id = "form" action="${pageContext.request.contextPath}/login/login01" onsubmit="return validateForm()" method="post" >
+       <form class="login-form" id="form" action="${pageContext.request.contextPath}/login/login01" onsubmit="return onSubmitForm()" method="post">
             <div class="form-group">
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" required>

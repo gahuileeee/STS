@@ -32,24 +32,21 @@ public class DrawController01 {
 	        	 String query = "insert into `keywords` (`name`) values ('"+key+"')"; 
 	  	         stmt.execute(query);
 	        }
+	        stmt.close();
+	        resultSet.close();
 	        conn.close();
 	        
 		}else {
 			Connection conn= DBConnector.getConnection("localhost:3306","keyword","root","1234");
 	        Statement stmt  = conn.createStatement(); 
-	        String query = "select count(`seq`) from keywords";
+	        String query = "select `name` from keywords order by rand() limit 1";
 	        ResultSet rs = stmt.executeQuery(query); 
-	        int a=0;
 	        while(rs.next()) {
-	        	 a= Integer.parseInt(rs.getString(1));   
-	       }
-	    
-	        query = "call TEST_PROC(floor(rand()*"+a+")+1)";
-	        rs = stmt.executeQuery(query);
-	        while(rs.next()) {
-	        	 key = rs.getString(2);
+	        	 key = rs.getString(1);
 	        	 model.addAttribute("key",key);
 	        }
+	        stmt.close();
+	        rs.close();
 	       conn.close();
 		}
 		return "drawing01";

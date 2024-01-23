@@ -5,8 +5,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class CookieManager {
+	   public CookieManager() {
+		}
+   
 
-    public void addCookie(HttpServletResponse response, String name, String value, int maxAgeInSeconds) {
+	public void addCookie(HttpServletResponse response, String name, String value, int maxAgeInSeconds) {
         Cookie cookie = new Cookie(name, value);
         cookie.setMaxAge(maxAgeInSeconds);
         cookie.setPath("/");
@@ -24,11 +27,17 @@ public class CookieManager {
         }
         return null;
     }
-
-    public void deleteCookie(HttpServletResponse response, String name) {
+    public static void deleteCookie(HttpServletResponse response,String name, String value) {
+        Cookie cookie = new Cookie(name, value);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+    }
+    /*
+    public static void deleteCookie(HttpServletResponse response, String name) {
         Cookie cookie = new Cookie(name, null);
         cookie.setMaxAge(0);
         cookie.setPath("/");
         response.addCookie(cookie);
     }
+*/
 }
