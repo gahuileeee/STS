@@ -9,7 +9,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href='/resources/css/board01.css'>
+   <link rel="stylesheet" href='/resources/css/board01.css'>
     <title>DraThing</title>
    
 </head>
@@ -42,9 +42,8 @@
         <div class="image-container" >
             <img src="data:image/png;base64,${print}" alt="Print Image"/>
             
-            <form action="<c:url value="/bulletin/main01"/>" method= "post" >
-            <input type = "hidden" name = "print" value= "${print}">
-            <input type = "hidden" name = "key" value= "${names[loop.index]}">
+            <form action="<c:url value="/bulletin01"/>" method= "post" >
+            <input type ="hidden" name="number" value="${numbers[loop.index]}">
             <button type = "sumbit" class ="button" id="button1" >
             <h5 >${names[loop.index]}</h5>
             </button>

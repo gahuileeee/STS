@@ -76,14 +76,18 @@ public class BulletinController01 {
         ResultSet rs = stmt.executeQuery(query);
         List<String> Images = new ArrayList<>();
         List<String> keys = new ArrayList<>();
+        List<String> numbers = new ArrayList<>();
         while(rs.next()) {
+        	String number=rs.getString(1);
         	String name =rs.getString(2);
+        	String user= rs.getString(4);
         	keys.add(name);
-//        	String base64Image = java.util.Base64.getEncoder().encodeToString(rs.getBytes(2));
         	Images.add(rs.getString(3));
+        	numbers.add(number);
         }
         model.addAttribute("names",keys);
         model.addAttribute("prints",Images);
+        model.addAttribute("numbers",numbers);
         rs.close();
         stmt.close();
         conn.close();
