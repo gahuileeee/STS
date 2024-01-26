@@ -2,6 +2,7 @@ package com.fastcampus.ch2;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DBConnector {
@@ -10,5 +11,6 @@ public class DBConnector {
 	                + "characterEncoding=utf8&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true";
 	        return DriverManager.getConnection(DB_URL, user, password);
 	    }
+	
 
 }

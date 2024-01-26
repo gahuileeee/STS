@@ -43,9 +43,62 @@
     margin: 5px 0; /* 간격 조절 */
 }
 
+.like-button {
+        margin-top: 20px;
+    }
+
+    button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    .heart-icon {
+        color: #FF1493; /* Pink color for heart icon */
+        font-size: 20px;
+        margin-right: 5px;
+    }
+
+    .like-text {
+        font-weight: bold;
+    }
 
 </style>
-<body>
+
+<script>
+
+function likePost() {
+	var numbervalue = ${number};
+	var likevalue = ${like};
+	console.log(numbervalue);
+	console.log(likevalue);
+    	var data = {
+    	        number : ${number},
+    	        like : ${like}
+    	    };
+    	
+    	console.log("data : " + JSON.stringify(data));
+    	
+    	fetch('./bulletin02', {
+    	    method: 'POST',
+    	    headers: {
+                'Content-Type': 'application/json', 
+            },
+            body: JSON.stringify(data)
+    	})
+    	.catch(error => {
+    	    console.error('There was a problem with the fetch operation:', error);
+    	});
+    	console.log("here..!");
+    	var waitTime = 500;
+    	 window.location.reload();
+    }
+</script>
+
 <body>
     <div id="title">
         <h1><span class="pink-text">Dra</span><span class="green-text">Thing</span></h1>
@@ -72,6 +125,14 @@
         <div class="image-container">
             <img src="data:image/png;base64,${print}" alt="Print Image"/>
         </div>
+        <Br>
+          <div class="like-button">
+            <button type="button" onclick="likePost()">
+                <span class="heart-icon">&#x2665;</span>
+                <span class="like-text">Like ${like}</span>
+            </button>
+        </div>
+    </div>
     </div>
 </body>
 </html>
