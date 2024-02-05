@@ -21,23 +21,21 @@ public class DrawController01 {
 			Model model,  HttpServletRequest request) throws Exception{
 		if(key!=null) {
 			model.addAttribute("key",key);
-			Connection conn= DBConnector.getConnection("localhost:3306","keyword","root","1234");
+			Connection conn= DBConnector.getConnection();
 	        Statement stmt  = conn.createStatement();
 	        
 	        String checkQuery = "SELECT * FROM `keywords` WHERE `name` = '" + key + "'";
-	        ResultSet resultSet = stmt.executeQuery(checkQuery);
-	        if(resultSet.next()) {
+	        ResultSet rs = stmt.executeQuery(checkQuery);
+	        if(rs.next()) {
 	        	  
 	        }else {
 	        	 String query = "insert into `keywords` (`name`) values ('"+key+"')"; 
 	  	         stmt.execute(query);
 	        }
-	        stmt.close();
-	        resultSet.close();
-	        conn.close();
+	        DBConnector.close(stmt,rs,conn);
 	        
 		}else {
-			Connection conn= DBConnector.getConnection("localhost:3306","keyword","root","1234");
+			Connection conn= DBConnector.getConnection();
 	        Statement stmt  = conn.createStatement(); 
 	        String query = "select `name` from keywords order by rand() limit 1";
 	        ResultSet rs = stmt.executeQuery(query); 
@@ -45,9 +43,7 @@ public class DrawController01 {
 	        	 key = rs.getString(1);
 	        	 model.addAttribute("key",key);
 	        }
-	        stmt.close();
-	        rs.close();
-	       conn.close();
+	        DBConnector.close(stmt,rs,conn);
 		}
 		return "drawing01";
 	}

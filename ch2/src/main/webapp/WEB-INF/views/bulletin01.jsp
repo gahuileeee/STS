@@ -209,7 +209,6 @@ function likePost() {
     	.catch(error => {
     	    console.error('There was a problem with the fetch operation:', error);
     	});
-    	console.log("here..!");
     	var waitTime = 3000;
     	 window.location.reload();
     }

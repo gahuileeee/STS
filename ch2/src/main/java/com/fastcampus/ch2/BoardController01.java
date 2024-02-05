@@ -1,6 +1,7 @@
 package com.fastcampus.ch2;
 
 import java.sql.Connection;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -23,8 +25,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class BoardController01 {
 	
 	@RequestMapping("/bulletin01")
-	public  String main(@RequestParam(name = "number")String number, Model model) throws SQLException{
-		Connection conn= DBConnector.getConnection("localhost:3306","keyword","root","1234");
+	public  String main(@RequestParam(name = "number")String number, Model model) throws SQLException, NamingException{
+		Connection conn= DBConnector.getConnection();
         Statement stmt  = conn.createStatement();
         String query = "Select * from print where number='"+number+"'";
         ResultSet rs = stmt.executeQuery(query);
@@ -43,9 +45,7 @@ public class BoardController01 {
         	lists.add(rs.getString(4));
         }
        model.addAttribute("lists",lists);
-        rs.close();
-        stmt.close();
-        conn.close();
+      DBConnector.close(stmt,rs,conn);
 		return "bulletin01";
 	}
 	
@@ -57,7 +57,7 @@ public class BoardController01 {
 			Model model) throws SQLException{
 		List<String> lists = new ArrayList<>();
 		try {
-			 Connection conn= DBConnector.getConnection("localhost:3306","keyword","root","1234");
+			 Connection conn= DBConnector.getConnection();
 		       Statement stmt  = conn.createStatement();
 		       int a=Integer.parseInt(paramMap.get("like"))+1; 
 		       stmt.executeUpdate("Update print set `like`="+a+" where number="+paramMap.get("number"));
@@ -66,9 +66,7 @@ public class BoardController01 {
 		       if(rs.next()) {
 		       	model.addAttribute("number",rs.getString(1));
 		       }
-		       rs.close();
-		       stmt.close();
-		       conn.close();	
+		       DBConnector.close(stmt,rs,conn);	
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -80,7 +78,7 @@ public class BoardController01 {
 	public String main2(@RequestParam(name = "comment")String comment,
 			@RequestParam(name = "number")String number, HttpServletRequest request,RedirectAttributes redirectAttributes) throws SQLException {
 		try {
-			Connection conn= DBConnector.getConnection("localhost:3306","keyword","root","1234");
+			Connection conn= DBConnector.getConnection();
 			Statement stmt = conn.createStatement();
 			HttpSession session=  request.getSession();
 			String id= null;
@@ -92,9 +90,11 @@ public class BoardController01 {
 			System.out.println(number);
 			stmt.executeUpdate("Insert into comments values(null,'"+number+"','"+id+"','"+comment+"')");
 			System.out.println(number);
+			DBConnector.close(stmt,conn,conn);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+		
 		redirectAttributes.addAttribute("number",number);
 		return "redirect:bulletin01";
 	}

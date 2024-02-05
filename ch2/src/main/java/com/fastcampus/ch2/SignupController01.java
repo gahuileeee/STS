@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.naming.NamingException;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,8 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class SignupController01 {
 	
 	@PostMapping("/signup01")
-    public List<String> login(@RequestBody LoginRequest loginRequest) throws SQLException {
-		 Connection conn= DBConnector.getConnection("localhost:3306","keyword","root","1234");
+    public List<String> login(@RequestBody LoginRequest loginRequest) throws SQLException, NamingException {
+		 Connection conn= DBConnector.getConnection();
 	        Statement stmt  = conn.createStatement(); 
 	        
 		List<String> lists = new ArrayList<>();
@@ -26,10 +28,10 @@ public class SignupController01 {
 			lists.add("올바른 이메일을 입력해주세요");
 		}else {
 		        String query1="Select * from `user` where uid='"+loginRequest.getEmail()+"' ";
-		         ResultSet set= stmt.executeQuery(query1);
-		         if(set.next()) {
+		         ResultSet rs= stmt.executeQuery(query1);
+		         if(rs.next()) {
 		        	 lists.add("이미 사용중인 이메일입니다.");
-		        	 set.close();
+		        	 DBConnector.close(stmt,rs,conn);
 			         return lists;
 		         }
 		}
@@ -39,12 +41,11 @@ public class SignupController01 {
 		}
 		
 		if(lists.isEmpty()) {
-		        	  String query = "INSERT INTO `user` VALUES ('"+loginRequest.getEmail()+"','"+loginRequest.getPassword()+"') ";
+		        	  String query = "INSERT INTO `user` VALUES ('"+loginRequest.getEmail()+"',"
+		        	  		+ "'"+loginRequest.getPassword()+"') ";
 				        stmt.executeUpdate(query);
-		        stmt.close();
-		        conn.close();
 		}
-	
+		DBConnector.close(stmt,conn,conn);
         return lists;
     }
 	
@@ -53,16 +54,14 @@ public class SignupController01 {
 		List<String> lists = new ArrayList<>();
 		 String p="null";
 		try {
-			 Connection conn= DBConnector.getConnection("localhost:3306","keyword","root","1234");
+			 Connection conn= DBConnector.getConnection();
 		        Statement stmt  = conn.createStatement(); 
 		        String query = "Select `upassword` from user where uid='"+loginRequest.getEmail()+"' ";
 		        ResultSet rs= stmt.executeQuery(query);  
 		        while(rs.next()) {
 		        	p=rs.getString(1);
 		        }	
-		    	rs.close();
-			      stmt.close();
-			        conn.close();
+		        DBConnector.close(stmt,rs,conn);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
